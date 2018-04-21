@@ -33,7 +33,7 @@ class Employee(UserMixin, db.Model):
 	def __repr__(self):
 		return '<User {}>'.format(self.email)
 
-	def set_access_level(level):
+	def set_access_level(self, level):
 		self.access_level = level
 
 	def set_password(self, password):
@@ -44,20 +44,22 @@ class Employee(UserMixin, db.Model):
 
 
 class JobData(db.Model):
+	__tablename__ = 'jobdata'
 	id = db.Column(db.Integer, primary_key=True)
 	quote_id = db.Column(db.Integer, db.ForeignKey('quoterequests.id'))
 	customer = db.Column(db.String(120), index=True, unique=False)
-	room_volume = db.Column(db.Integer(), unique=False)
+	num_rooms = db.Column(db.Integer, unique=False)
 	wall_area = db.Column(db.Integer, unique=False)
-	window_area = db.Column(db.Integer, unique=False)
-	door_area = db.Column(db.Integer, unique=False)
+	num_windows = db.Column(db.Integer, unique=False)
+	num_doors = db.Column(db.Integer, unique=False)
 	patchwork = db.Column(db.String(120), unique=False)
 	damages = db.Column(db.String(120), unique=False)
 	trim = db.Column(db.String(120), unique=False)
 	current_sheen = db.Column(db.String(120), unique=False)
 	current_color = db.Column(db.String(120), unique=False)
 	previous_paint = db.Column(db.String(120), unique=False)
-	other = db.Column(db.String(500), unique=False)
+	description = db.Column(db.String(500), unique=False)
+	estimate = db.Column(db.Integer)
 
 	def __repr__(self):
 		return '<JobData {}>'.format(self.customer)

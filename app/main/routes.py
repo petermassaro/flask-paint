@@ -68,11 +68,19 @@ def quoteRequests():
 def jobentry(quoteId=0):
 	form = JobDataForm()
 	if form.validate_on_submit():
-		jobData = JobData(quote_id=quoteId, customer=form.customer.data, room_volume=form.room_volume.data,
-			wall_area=form.wall_area.data, window_area=form.window_area.data, door_area=form.door_area.data,
+		jobData = JobData(
+			quote_id=quoteId, customer=form.customer.data,
+			num_rooms=form.num_rooms.data,
+			wall_area=form.wall_area.data, 
+			num_windows=form.num_windows.data, 
+			num_doors=form.num_doors.data,
 			patchwork=form.patchwork.data, damages=form.damages.data, trim=form.trim.data,
-			current_sheen=form.current_sheen.data, current_color=form.current_color.data,
-			previous_paint=form.previous_paint.data, other=form.other.data)
+			current_sheen=form.current_sheen.data, 
+			current_color=form.current_color.data,
+			previous_paint=form.previous_paint.data, 
+			description=form.description.data,
+			estimate=form.estimate.data
+			)
 		db.session.add(jobData)
 		db.session.commit()
 		flash("Job information submitted")
