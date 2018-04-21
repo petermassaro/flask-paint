@@ -1,0 +1,39 @@
+
+<tr>
+	<td>{{ quote.customer }}</td>
+	<td>
+		<a class='btn btn-info' role='button' data-toggle='modal' data-target='#myModal{{ quote.id }}'>QuickView</a>
+	</td>
+	<td>
+		<a class='btn btn-warning' href="{{ url_for('main.edit', quoteId=quote.id) }}" role='button'>Enter/Edit</a>
+	</td>
+	<td>
+		<a class='btn btn-primary' href="{{ url_for('main.jobentry', quoteId=quote.id) }}" role='button'>Enter/Edit</a>
+	</td>
+</tr>
+
+<div id="myModal{{ quote.id }}" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Job Info for {{ quote.customer }}</h4>
+      </div>
+      <div class="modal-body">
+        <h5>Address</h5>
+        <div>{{ quote.street }}</div>
+        <div>{{ quote.city }}, {{ quote.state }} {{ quote.zip_code }}</div>
+        <h5>Contact</h5>
+        <div>Phone: {{ quote.phone }}</div>
+        <div>Preferred Time: {{ quote.time_requested }}</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <a class='btn btn-primary' href="{{ url_for('main.textCustDetails', messageContent='{}, {}, {}, {}, {}'.format(quote.customer, quote.street, quote.city, quote.state, quote.zip_code)) }}" role='button'>SMS</a>
+      </div>
+    </div>
+
+  </div>
+</div>
