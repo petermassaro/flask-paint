@@ -88,6 +88,13 @@ def jobentry(quoteId=0):
 	return render_template('jobentry.html', form=form)
 
 
+@bp.route('/jobdata')
+@login_required
+def jobdata(quoteId=0):
+	jobItems = JobData.query.filter_by(quote_id=quoteId).all()
+	return render_template('jobdata.html', job_items=jobItems)
+
+
 @bp.route('/smsCustomerDetails/<messageContent>', methods=['GET','POST'])
 @login_required
 def textCustDetails(messageContent):

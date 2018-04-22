@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block app_content %}
+<div class="container">
+	<table class="table table-hover table-responsive">
+		<h2>Job Data: {{ job_items[0].customer }}</h2>
+			<tr>
+				<td><h4>Description</h4></td>
+				<td><h4>Estimate</h4></td>
+				<td><h4>View/Edit</h4></td>
+			</tr>
+			{% for job_item in job_items %}
+				{% include "_jobItemTable.html" %}
+			{% endfor %}
+	</table>
+</div>
+
+{% endblock %}
