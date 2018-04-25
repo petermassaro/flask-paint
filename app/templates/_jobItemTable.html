@@ -3,6 +3,7 @@
 	<td>{{ job_item.description }}</td>
 	<td>{{ job_item.estimate }}</td>
 	<td>
-		<a class='btn btn-primary' href="{{ url_for('main.jobentry', jobItemId=job_item.id) }}" role='button'>View/Edit</a>
+		<a class='btn btn-primary' href="{{ url_for('main.editJobData',
+		quoteId=job_item.quote_id, itemId=job_item.id) }}" role='button'>View/Edit</a>
 	</td>
 </tr>

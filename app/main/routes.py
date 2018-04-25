@@ -95,6 +95,33 @@ def jobdata(quoteId=0):
 	return render_template('jobdata.html', job_items=jobItems)
 
 
+@bp.route('/editJobData/<quoteId>/<itemId>', methods=['GET', 'POST'])
+@login_required
+def editJobData(quoteId, itemId):
+	data = JobData.query.filter_by(id=itemId).first()
+	form = JobDataForm(obj=data)
+	if form.validate_on_submit():
+		data.quote_id=quoteId
+		data.customer=form.customer.data
+		data.num_rooms=form.num_rooms.data
+		data.wall_area=form.wall_area.data
+		data.num_windows=form.num_windows.data
+		data.num_doors=form.num_doors.data
+		data.patchwork=form.patchwork.data
+		data.damages=form.damages.data
+		data.trim=form.trim.data
+		data.current_sheen=form.current_sheen.data
+		data.current_color=form.current_color.data
+		data.previous_paint=form.previous_paint.data
+		data.description=form.description.data
+		data.estimate=form.estimate.data
+		db.session.commit()
+		flash('Job Data item {} for customer {} has been edited'.format(
+			data.id, data.customer))
+		return redirect(url_for('main.quoteRequests'))
+	return render_template('quote.html', form=form)
+
+
 @bp.route('/smsCustomerDetails/<messageContent>', methods=['GET','POST'])
 @login_required
 def textCustDetails(messageContent):
